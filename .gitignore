@@ -1,0 +1,6 @@
+.idea
+vendor
+serial2tcp
+
+
+go.sum
