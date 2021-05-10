@@ -37,31 +37,31 @@ func (e *Escp) Print(str string) *Escp {
 }
 
 // ESC/P
-func (e *Escp) SelectJustification(align Align) *Escp {
+func (e *Escp) SpecifyAlignment(align Align) *Escp {
 	e.buffer.Write([]byte{0x1B, 0x61, byte(align)})
 	return e
 }
 
 // ESC/P & ESC/P2
-func (e *Escp) SelectCharacterTable(char CharTable) *Escp {
+func (e *Escp) SpecifyCharacterTable(char CharTable) *Escp {
 	e.buffer.Write([]byte{0x1B, 0x74, byte(char)})
 	return e
 }
 
 // ESC/P & ESC/P2
-func (e *Escp) SelectCharacterSet(c CharCode) *Escp {
+func (e *Escp) SpecifyCharacterSet(c CharCode) *Escp {
 	e.buffer.Write([]byte{0x1B, 0x52, byte(c)})
 	return e
 }
 
 // ESC/P & ESC/P2
-func (e *Escp) SelectCharacterStyle(style CharStyle) *Escp {
+func (e *Escp) SpecifyCharacterStyle(style CharStyle) *Escp {
 	e.buffer.Write([]byte{0x1B, 0x71, byte(style)})
 	return e
 }
 
 // ESC/P & ESC/P2
-func (e *Escp) SelectBold() *Escp {
+func (e *Escp) SpecifyBold() *Escp {
 	e.buffer.Write([]byte{0x1B, 0x45})
 	return e
 }
@@ -73,7 +73,7 @@ func (e *Escp) CancelBold() *Escp {
 }
 
 // ESC/P & ESC/P2
-func (e *Escp) SelectItalic() *Escp {
+func (e *Escp) SpecifyItalic() *Escp {
 	e.buffer.Write([]byte{0x1B, 0x34})
 	return e
 }
@@ -85,7 +85,7 @@ func (e *Escp) CancelItalic() *Escp {
 }
 
 // ESC/P & ESC/P2
-func (e *Escp) SelectDoubleStrike() *Escp {
+func (e *Escp) SpecifyDoubleStrike() *Escp {
 	e.buffer.Write([]byte{0x1B, 0x47})
 	return e
 }
