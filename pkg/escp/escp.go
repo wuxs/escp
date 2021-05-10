@@ -4,7 +4,10 @@ import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
+	"golang.org/x/text/encoding/simplifiedchinese"
+	"golang.org/x/text/transform"
 	"io"
+	"io/ioutil"
 )
 
 type Escp struct {
@@ -29,7 +32,10 @@ func (e *Escp) Flush() (int, error) {
 }
 
 func (e *Escp) Print(str string) *Escp {
-	e.buffer.Write([]byte(str))
+	reader := transform.NewReader(bytes.NewReader([]byte(str)), simplifiedchinese.GB18030.NewEncoder())
+	b, _ := ioutil.ReadAll(reader)
+	fmt.Println(hex.EncodeToString(b))
+	e.buffer.Write(b)
 	return e
 }
 
