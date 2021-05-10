@@ -25,9 +25,6 @@ func NewEscP(output io.Writer) *Escp {
 func (e *Escp) Flush() (int, error) {
 	data := e.buffer.Bytes()
 	e.buffer.Reset()
-	datas := hex.EncodeToString(data)
-	fmt.Println(datas)
-	fmt.Println(data)
 	return e.output.Write(data)
 }
 
