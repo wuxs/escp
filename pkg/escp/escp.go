@@ -2,8 +2,6 @@ package escp
 
 import (
 	"bytes"
-	"encoding/hex"
-	"fmt"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"golang.org/x/text/transform"
 	"io"
@@ -31,7 +29,6 @@ func (e *Escp) Flush() (int, error) {
 func (e *Escp) Print(str string) *Escp {
 	reader := transform.NewReader(bytes.NewReader([]byte(str)), simplifiedchinese.GB18030.NewEncoder())
 	b, _ := ioutil.ReadAll(reader)
-	fmt.Println(hex.EncodeToString(b))
 	e.buffer.Write(b)
 	return e
 }
@@ -115,6 +112,7 @@ func (e *Escp) DoubleHeight(status Status) *Escp {
 }
 
 // ESC/P & ESC/P2
+// TODO BarCode
 func (e *Escp) BarCode(k BarType) *Escp {
 	e.buffer.Write([]byte{0x1B, 0x28, 0x42, byte(k)})
 	return e
